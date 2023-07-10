@@ -16,6 +16,9 @@ function setup() {
 
     fourierX = dft(x);
     fourierY = dft(y);
+
+    fourierX.sort((a, b) => b.amp - a.amp);
+    fourierY.sort((a, b) => b.amp - a.amp);
 }
   
 function draw() {
@@ -35,48 +38,7 @@ function draw() {
         vertex(path[i].x, path[i].y);
     }
     endShape();
-    // translate(200,200);
-
-    // let x = 0;
-    // let y = 0;
-    // let cx = 0;
-    // let cy = 0;
-    // for(i = 0; i < fourierY.length; i++) {
-    //     let freq = fourierY[i].freq;
-    //     let radius = fourierY[i].amp;
-    //     let phase = fourierY[i].phase;
-    //     stroke(255, 100);
-    //     noFill();
-    //     cx = x;
-    //     cy = y;
-    //     ellipse(cx, cy, radius * 2); 
-    //     x += radius * cos(freq * time + phase);
-    //     y += radius * sin(freq * time + phase);
-    //     fill(255);
-    //     stroke(255);
-    //     line(cx, cy, x, y);
-    //     ellipse(x, y, 2);
-    
-    //     noFill();
-        
-    // }
-    // wave.push(y);
-    // stroke(255,100);
-    // line(x, y, 300, y);
-    // stroke(255);
-    // translate(300, 0);
-    // beginShape();
-    // for(var i = 0; i < wave.length; i++) {
-    //     vertex(i , wave[wave.length - 1 - i]);
-    // }
-    // endShape();
-    
-    // translate(-300, 0);
-    
-    
-    // if(wave.length > 1000)
-    //     wave.shift();
-    if(path.length > x.length)
+    if(path.length > x.length + 10)
         path = [];
     dt = TWO_PI / fourierY.length;
     time += dt;
